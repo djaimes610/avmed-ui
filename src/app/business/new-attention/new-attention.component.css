@@ -1,0 +1,34 @@
+.custom-border-tb {
+   border-right: 1px solid; 
+   border-color: #ced4da;
+}
+
+.invalid-form {
+   font-size: 0.875em;
+   color: #dc3545;
+   height: 21px;
+}
+.invalid-input {
+   border-color: #dc3545;
+}
+
+.search-button {
+   position: absolute;
+   margin-left: 103px;
+   border: 0px;
+   margin-top: 1px;
+}
+
+.bottom-card {
+   margin-bottom: 30px;
+}
+
+.custom-scroll {
+   scroll-margin: 75px;
+}
+
+.custom-alert {
+   position: absolute;
+   top: 63px;
+   right: 28px;
+}

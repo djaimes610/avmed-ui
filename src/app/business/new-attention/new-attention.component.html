@@ -1,0 +1,500 @@
+
+<div id="main" class="main" #main>
+
+
+    <div class="pagetitle" >
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Home</a></li>
+          <li class="breadcrumb-item">Nueva atención</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+
+    <div class="section">
+      <div class="row">
+      
+        <div class="col-lg-12" >
+          <div class="custom-scroll" id="patient"></div>
+
+          <div class="card ">
+            <div class="card-body">
+              <div class="row">
+                <div class="d-flex">
+                  <h5 class="card-title">Paciente</h5>
+                  <div  style="margin: auto 15px;">
+                    <button class="btn  btn-outline-secondary" (click)="viewPatientHistory(longContent)"  [disabled]="!patientModel.id">Ver Historial</button>
+                  </div>
+                </div>
+              </div>
+             
+
+              <form #formPatient="ngForm" class="row g-3 needs-validation" >
+                <div class="col-md-2">
+                  <label for="validationCustom001" class="form-label">Tipo Documento</label>
+                  <select class="form-select" disabled>
+                    <option selected disabled value="">DNI</option>
+                  </select>
+                </div>
+
+                <div class="col-md-2"  >
+                  <label for="validationCustom002" class="form-label">Número Documento</label>
+                  <div class="d-flex">
+                    <input type="text" [disabled]="isAppointment" #documentNumber="ngModel" [(ngModel)]="patientModel.documentNumber" name="documentNumber"  onKeyPress="if(this.value.length==8) return false;"  class="form-control" required [ngClass]="{'invalid-input': documentNumber['invalid'] && saveState}">
+                    <button type="button"  [disabled]="isAppointment" class="btn btn-light search-button" (click)="searchByDocumentNumber()">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="invalid-form" *ngIf="documentNumber['invalid'] && saveState">
+                    Dato requerido.
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <label for="validationCustom004" class="form-label">Código asegurado</label>
+                  <div class="d-flex">
+                    <input type="text" [disabled]="isAppointment" #insuredCode="ngModel" [(ngModel)]="patientModel.insuredCode" name="insuredCode"  onKeyPress="if(this.value.length==4) return false;" class="form-control" required   [ngClass]="{'invalid-input': insuredCode['invalid'] && saveState}">
+                    <button type="button" [disabled]="isAppointment" class="btn btn-light search-button" (click)="searchByinsuredCode()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="invalid-form" *ngIf="insuredCode['invalid'] && saveState">
+                    Dato requerido.
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <label for="validationCustom003" class="form-label">Historia clínica</label>
+                  <input type="text" #clinicalHistoryNumber="ngModel" [(ngModel)]="patientModel.clinicalHistoryNumber" name="clinicalHistoryNumber"  class="form-control" disabled>
+                </div>
+
+                <div class="col-md-2">
+                  <label for="validationCustom001" class="form-label">Sexo</label>
+                  <select class="form-select" [(ngModel)]="patientModel.sex" name="sex" disabled>
+                    <option *ngFor="let sex of Sex" [ngValue]="sex">{{sex}}</option>
+                  </select>
+                </div>
+
+                <div class="col-md-2">
+                  <label for="validationCustom003" class="form-label">Edad</label>
+                  <input class="form-select" type="age" #age="ngModel" [(ngModel)]="patientModel.age" name="age"  disabled>
+                </div>
+                
+                <div class="col-md-3">
+                  <label for="validationCustom005" class="form-label">Nombre(s)</label>
+                  <input type="text" #name="ngModel" [(ngModel)]="patientModel.name" name="name" class="form-control"  disabled>
+                </div>
+
+                <div class="col-md-3">
+                  <label for="validationCustom006" class="form-label">Apellido Paterno</label>
+                  <input type="text" #paternalLastName="ngModel" [(ngModel)]="patientModel.paternalLastName" name="paternalLastName"  class="form-control" disabled>
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom001" class="form-label">Apellido Materno</label>
+                  <input type="text" #maternalLastName="ngModel" [(ngModel)]="patientModel.maternalLastName" name="maternalLastName"  class="form-control" disabled>
+                </div>
+               
+                <div class="col-md-3">
+                  <label for="validationCustom001" class="form-label">Fecha Nacimiento</label>
+                  <input type="text" #birthDate="ngModel" [(ngModel)]="patientModel.birthDate" name="birthDate"  class="form-control" disabled>
+                </div>
+
+                
+             
+              </form>
+
+            </div>
+          </div>
+
+          <div class="custom-scroll" id="triage"></div>
+         
+          <div class="card" >
+            <div class="card-body">
+              <h5 class="card-title">Registro de atención</h5>
+
+              <!-- Custom Styled Validation -->
+              <form #formAttention="ngForm" class="row g-3 needs-validation" novalidate>
+                <div class="col-md-3">
+                  <label for="validationCustom001" class="form-label">Presión Arterial (mmHg)</label>
+                  <input type="text" class="form-control" #bloodPressure="ngModel" [(ngModel)]="attentionFormModel.bloodPressure" name="bloodPressure" >
+                  
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom002" class="form-label">Frecuencia cardíaca (min)</label>
+                  <input type="text" class="form-control" #heartRate="ngModel" [(ngModel)]="attentionFormModel.heartRate" name="heartRate"   >
+                 
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom003" class="form-label">Frecuencia respiratoria (min)</label>
+                  <input type="text" class="form-control" #breathingFrequency="ngModel" [(ngModel)]="attentionFormModel.breathingFrequency" name="breathingFrequency"  >
+                  
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom004" class="form-label">Temperatura (°C)</label>
+                  <input type="text" class="form-control" #temperature="ngModel" [(ngModel)]="attentionFormModel.temperature" name="temperature"   >
+                  
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom005" class="form-label">Peso (kg)*</label>
+                  <input type="number" #weight="ngModel" [(ngModel)]="attentionFormModel.weight" name="weight"  class="form-control" required [ngClass]="{'invalid-input': weight['invalid']  &&(weight['dirty'] || weight['touched']  || saveState)}">
+                  <div class="invalid-form" *ngIf="weight['invalid'] && (weight['dirty'] || weight['touched'] || saveState)">
+                    Dato requerido.
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom005" class="form-label">Talla (cm)*</label>
+                  <input type="number" #height="ngModel" [(ngModel)]="attentionFormModel.height" name="height"  class="form-control" required [ngClass]="{'invalid-input': height['invalid']  &&(height['dirty'] || height['touched'] || saveState)}">
+                  <div class="invalid-form" *ngIf="height['invalid'] && (height['dirty'] || height['touched'] || saveState)">
+                    Dato requerido.
+                  </div>
+                </div>
+               
+
+             
+                <div class="col-md-6">
+                  <label for="validationCustom001" class="form-label">Servicio</label>
+                  <select class="form-select" id="validationCustom001" >
+                    <option selected>Consulta Extena</option>
+                  </select>
+                  
+                </div>
+
+                <div class="col-md-12">
+                  <label for="Address" class="col-md-4 col-lg-3 col-form-label">Relato del paciente*</label>
+                  <textarea id="validationCustom012" #patientReport="ngModel" [(ngModel)]="attentionFormModel.patientReport" name="patientReport" type="text" class="form-control" required [ngClass]="{'invalid-input': patientReport['invalid']  &&(patientReport['dirty'] || patientReport['touched'] || saveState)}"> </textarea>
+                  <div class="invalid-form" *ngIf="patientReport['invalid'] && (patientReport['dirty'] || patientReport['touched']  || saveState)">
+                    Dato requerido.
+                  </div>
+                </div>
+
+                
+                
+              </form>
+
+            </div>
+          </div>
+
+          <div class="custom-scroll" id="diagnoses"></div>
+                
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Diagnóstico y recomendaciones</h5>
+              
+              <form class="row g-3 needs-validation" novalidate>
+           
+  
+                <div class="col-md-6">
+                  <label for="validationCustom001" class="form-label">Diagnóstico*</label>
+                  <select class="form-select mt-2" [(ngModel)]="attentionFormModel.diagnosisId"  name="diagnosisId">
+                    <option selected disabled value="">...</option>
+                    <option *ngFor="let diagnosis of diagnoses" [ngValue]="diagnosis.id">{{diagnosis.code}} - {{diagnosis.name}}</option>
+                  </select>
+                  <div class="invalid-form" *ngIf="(!diagnosesSelected.length && saveState)">
+                    Dato requerido.
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <button class="btn btn-primary" style="margin-top: 42px; padding-left: 40px;  padding-right: 42px;" (click)="addDiagnosis()" type="button">Agregar</button>
+                 
+                </div>
+
+                <div class="col-12">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <div class="row"> 
+                          <div class="col-2 custom-border-tb">
+                            <th scope="col col-md-6">Código</th>
+
+                          </div>
+                          <div class="col-7 custom-border-tb" >
+                            <th scope="col">Diagnóstico</th>
+                          </div>
+
+                          <div class="col-3">
+                            <th scope="col"></th>
+                          </div>
+                        </div>
+                      </tr>
+
+                     
+                    </thead>
+                    <tbody>
+
+                    
+                      <tr *ngFor = "let diagnosis of diagnosesSelected">
+                        <div class="row"> 
+                          <div class="col-2 custom-border-tb" >
+                            <td>{{diagnosis.code}}</td>
+
+                          </div>
+                          <div class="col-7 custom-border-tb">
+                            <td>{{diagnosis.name}}</td>
+                          </div>
+
+                          <div class="col-3">
+                            <button type="button" class="btn btn-light" (click)="removeDiagnosis(diagnosis)" >Eliminar
+                            </button>
+                          </div>
+                        </div>
+                      </tr>
+                      
+                     
+                      <tr *ngIf="!diagnosesSelected.length">
+                        <div class="row"> 
+                          <div class="col-2 custom-border-tb">
+                            <td style="color: white;">x</td>
+
+                          </div>
+                          <div class="col-7 custom-border-tb">
+                            <td style="color: white; border: 1px;">x</td>
+                          </div>
+
+                          <div class="col-3">
+                            <td style="color: white;">x</td>
+                          </div>
+                        </div>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                  
+                </div>
+
+                <div class="col-md-12">
+                  <label for="Address" class="col-md-4 col-lg-3 col-form-label">Recomendaciones</label>
+                  <div class="col-md-8 col-lg-9">
+                    <textarea  #recommendations="ngModel" [(ngModel)]="attentionFormModel.recommendations" name="recommendations" type="text" class="form-control" id="Address"> </textarea>
+                  </div>
+                </div>
+  
+
+              </form>
+
+            </div>
+          </div>
+             
+          <div class="custom-scroll" id="treatments"></div>
+      
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Receta</h5>
+             
+
+              <form #attentionTreatement="ngForm" (ngSubmit)="addTreatment()"  class="row g-3 needs-validation">
+                
+                <div class="col-md-8">
+                  <label for="validationCustom0041" class="form-label">Medicamento*</label>
+                  <select class="form-select"  #medicineId="ngModel" [(ngModel)]="attentionFormModel.medicineId" name="medicineId"  required>
+                    <option selected disabled value="">...</option>
+                    <option *ngFor="let medicine of medicines" [ngValue]="medicine.id">{{medicine.name}}</option>
+                  </select>
+                  <div class="invalid-form" *ngIf="medicineId['invalid'] && addTreatmentState">
+                    Dato requerido.
+                  </div>
+                  <div class="invalid-form" *ngIf="!treatmentsSelected.length && saveState">
+                    Dato requerido.
+                  </div>
+                  
+                </div>
+                <div class="col-md-2">
+                  <label for="validationCustom046" class="form-label">Dosis*</label>
+                  <input type="number" #dose="ngModel" [(ngModel)]="attentionFormModel.dose" name="dose"  class="form-control" required  [ngClass]="{'invalid-input': dose['invalid']  && addTreatmentState}">
+                  <div class="invalid-form" *ngIf="dose['invalid'] && addTreatmentState">
+                    Dato requerido.
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <label for="validationCustom043" class="form-label"></label>
+                  <select class="form-select mt-2"  #doseUn="ngModel"   [(ngModel)]="attentionFormModel.doseUn"  name="doseUn"  required>
+                    <option *ngFor="let doseUn of dosesUn" [ngValue]="doseUn">{{doseUn}}</option>
+                  </select>
+  
+                </div>
+                
+  
+                <div class="col-md-2">
+                  <label for="validationCustom042" class="form-label">Frecuencia*</label>
+                  <input type="number" #frequencyNumber="ngModel" [(ngModel)]="attentionFormModel.frequencyNumber" name="frequencyNumber"  class="form-control" required  [ngClass]="{'invalid-input': frequencyNumber['invalid']  && addTreatmentState}">
+                  <div class="invalid-form" *ngIf="frequencyNumber['invalid'] && addTreatmentState">
+                    Dato requerido.
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <label for="validationCustom043" class="form-label"></label>
+                  <select class="form-select mt-2"  #frequencyType="ngModel"   [(ngModel)]="attentionFormModel.frequencyType"  name="frequencyType"  required>
+                    <option *ngFor="let frecuency of frequencyTypes" [ngValue]="frecuency">{{frecuency}}</option>
+                  </select>
+  
+                </div>
+  
+                <div class="col-md-2">
+                  <label for="validationCustom044" class="form-label">Tiempo*</label>
+                  <input type="number" #durationNumber="ngModel" [(ngModel)]="attentionFormModel.durationNumber" name="durationNumber"  class="form-control" required  [ngClass]="{'invalid-input': durationNumber['invalid']  && addTreatmentState}">
+                  <div class="invalid-form" *ngIf="durationNumber['invalid'] && addTreatmentState">
+                    Dato requerido.
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <label for="validationCustom045" class="form-label"></label>
+                  <select class="form-select mt-2" #durationType="ngModel" [(ngModel)]="attentionFormModel.durationType" name="durationType"  required >
+                    <option *ngFor="let durationType of durationTypes" [ngValue]="durationType" >{{durationType}}</option>
+                  </select>
+               
+                </div>
+  
+                
+               
+  
+                <div class="col-md-2">
+                  <label for="validationCustom046" class="form-label">Cantidad*</label>
+                  <input type="number" #quantity="ngModel" [(ngModel)]="attentionFormModel.quantity" name="quantity"  class="form-control" required  [ngClass]="{'invalid-input': quantity['invalid']  && addTreatmentState}">
+                  <div class="invalid-form" *ngIf="quantity['invalid'] && addTreatmentState">
+                    Dato requerido.
+                  </div>
+                </div>
+  
+                <div class="col-md-2">
+                  <label for="validationCustom046" class="form-label">Vía de adm.</label>
+                  <select class="form-select"  #routeAdministration="ngModel" [(ngModel)]="attentionFormModel.routeAdministration" name="routeAdministration"  required >
+                    <option *ngFor="let route of routesAdministration" [ngValue]="route">{{route}}</option>
+                  </select>
+                </div>
+  
+                <div class="col-md-6">
+                  <label for="validationCustom001" class="form-label">Diagnóstico*</label>
+                  <select class="form-select mt-2" #diagnosisIdByMedicine="ngModel" [(ngModel)]="attentionFormModel.diagnosisIdByMedicine" name="diagnosisIdByMedicine"  required >
+                    <option selected disabled value="">...</option>
+                    <option  *ngFor="let diagnosis of diagnosesSelected" [ngValue]="diagnosis.id">{{diagnosis.code}} {{diagnosis.name}}</option>
+                  </select>
+
+                  <div class="invalid-form" *ngIf="diagnosisIdByMedicine['invalid'] && addTreatmentState">
+                    Dato requerido.
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <button class="btn btn-primary"  type="submit" style="margin-top: 42px; padding-left: 40px;  padding-right: 42px;"  >Agregar</button>
+                </div>
+
+                <div class="col-12">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Medicamento</th>
+                        <th scope="col">Dosis</th>
+                        <th scope="col">Frec.</th>
+                        <th scope="col">Duración</th>
+                        <th scope="col">Vía</th>
+                        <th scope="col col-md-6">Diagnóstico</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>                            
+
+                      <tr *ngFor = "let treatment of treatmentsSelected">
+                        <td>{{treatment.medicine.name}}</td>
+                        <td>{{treatment.dose}} {{treatment.doseUn}}</td>
+                        <td>{{treatment.frequencyNumber}} {{treatment.frequencyType}}</td>
+                        <td>{{treatment.durationNumber}} {{treatment.durationType}}</td>
+                        <td>{{treatment.routeAdministration}}</td>
+                        <td>{{treatment.diagnosis.code}} - {{treatment.diagnosis.name | slice:0:12}}</td>
+                        <td>
+                          <button type="button" class="btn btn-light"  (click)="removeTreatment(treatment)" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                          </svg>
+                        </button>
+                        </td>
+                      </tr>
+                      <tr >
+                        <td style="color: white; border: 1px;">x</td>
+                        <td style="color: white; border: 1px;">x</td>
+                        <td style="color: white; border: 1px;">x</td>
+                        <td style="color: white; border: 1px;">x</td>
+                        <td style="color: white; border: 1px;">x</td>
+                        <td style="color: white; border: 1px;">x</td>
+                        <td style="color: white; border: 1px;">x</td>
+                      </tr>
+                      
+
+                    </tbody>
+                  </table>
+                </div>
+                
+
+               
+                <div class="col-4">
+                  <label for="inputDate" class=" col-form-label">Fecha de vencimiento de la receta*</label>
+                  <input type="date" #expirationDate="ngModel" [(ngModel)]="attentionFormModel.expirationDate" name="expirationDate"  class="form-control" required [ngClass]="{'invalid-input': expirationDate['invalid']  &&(expirationDate['dirty'] || expirationDate['touched'] || saveState)}">
+                  <div class="invalid-form" *ngIf="expirationDate['invalid'] && (expirationDate['dirty'] || expirationDate['touched'] || saveState)">
+                    Dato requerido.
+                  </div>
+                </div>
+
+              </form>
+           
+
+          
+            </div>
+          </div>
+
+          <div class="custom-scroll" id="expirationDate"></div>
+
+          
+          <div class="row">
+
+          
+            <div class="col-12">
+              <button class="btn btn-primary" (click)="validateInfo(main, confirm)">Registrar atención</button>
+              <button class="btn  btn-outline-secondary" style="margin-left: 10px;" (click)="cancel()">Cancelar</button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+</div><!-- End #main -->
+
+
+
+<ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" style="color: #012970;">Listado de atenciones</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body" style="overflow-y: hidden;">
+   <app-patient-history [patientId]="patientModel.id"></app-patient-history>
+  </div>
+</ng-template>
+
+
+<ng-template #confirm let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" style="font-size: 20px;">Por favor confirmar...</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    Estas seguro de registrar la atención?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary"  (click)="modal.dismiss('Cross click')">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="saveInfo(formPatient, formAttention, attentionTreatement)">Sí, registrar</button>
+  </div>
+</ng-template>
+
+
+<div class="custom-alert" *ngIf="showSuccessAlert" style="bottom: 10px;">
+  <ngb-alert [type]="'success'" >
+    La atención se registró los correctamente
+  </ngb-alert>
+</div>

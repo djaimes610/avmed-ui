@@ -1,0 +1,30 @@
+
+.current-attention:hover {
+    background: #f6f9ff;
+}
+
+.current-attention {
+    cursor: pointer;
+}
+
+.custom-scroll {
+    overflow-y: auto;
+    /* box-sizing: border-box; */
+    height: 396px;
+}
+
+.custom-border-tb {
+    border-right: 1px solid; 
+    border-color: #ced4da;
+ }
+
+.form-control:disabled {
+    background-color: #e9ecef30;
+}
+.form-select:disabled {
+    background-color: #e9ecef30;
+}
+
+.current-selected {
+    background: #f6f9ff;
+}

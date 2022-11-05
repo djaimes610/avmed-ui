@@ -1,0 +1,98 @@
+<div id="main" class="main">
+
+  <div class="pagetitle">
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="">Home</a></li>
+        <li class="breadcrumb-item">Listado pacientes</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <div class="section">
+    <div class="row">
+    
+      <div class="col-lg-12">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Listado de pacientes</h5>
+
+            <div class="col-12">
+              <div class="search-bar">
+                <form class="search-form d-flex align-items-center mb-3" method="POST" >
+                  <input type="number" name="query" placeholder="Buscar por Número Documento o C.A." title="Enter search keyword" [(ngModel)]="searchValue" (keydown.enter)="search($event)">
+                  <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                </form>
+              </div>
+            </div>
+            <div class="col-12">
+                
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Tipo Doc.</th>
+                    <th scope="col">Número Doc.</th>
+                    <th scope="col">C.A.</th>
+                    <th scope="col">H.C.</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">A. paterno</th>
+                    <th scope="col">A. materno</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col "></th>
+                    <th scope="col "></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  *ngFor="let patient of patients">
+                    <td>DNI</td>
+                    <td>{{patient.documentNumber}}</td>
+                    <td>{{patient.insuredCode}}</td>
+                    <td>{{patient.clinicalHistoryNumber}}</td>
+                    <td>{{patient.name}}</td>
+                    <td>{{patient.paternalLastName}}</td>
+                    <td>{{patient.maternalLastName}}</td>
+                    <td>{{patient.age}}</td>
+                    <td>
+                      <button type="button" class="btn btn-light" (click)="showDetail(patient, detail)">Ver detalle</button>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-light" (click)="showHistory(patient.id, history)">Ver historial</button>
+                    </td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div><!-- End #main -->
+
+
+<ng-template #history let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" style="color: #012970;">Historial de atenciones</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body" style="overflow-y: hidden;">
+   <app-patient-history  [patientId]="patientIdSelected"></app-patient-history>
+  </div>
+</ng-template>
+
+
+<ng-template #detail let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" style="color: #012970;">Paciente</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body" style="overflow-y: hidden;">
+   <app-patient-detail [patient]="patientSelected"></app-patient-detail>
+  </div>
+</ng-template>

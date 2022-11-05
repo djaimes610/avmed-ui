@@ -1,0 +1,160 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card" >
+            <div class="card-body">
+              <h5 class="card-title">Detalle tención</h5>
+        
+              <!-- Custom Styled Validation -->
+              <form #formAttention="ngForm" class="row g-3 needs-validation" novalidate>
+                <div class="col-md-3">
+                  <label for="validationCustom001" class="form-label">P. Arterial (mmHg)</label>
+                  <input type="text" class="form-control" #bloodPressure="ngModel" [(ngModel)]="attentionSelected.triage.bloodPressure" name="bloodPressure" disabled >
+                  
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom002" class="form-label">F. cardíaca (min)</label>
+                  <input type="text" class="form-control" #heartRate="ngModel" [(ngModel)]="attentionSelected.triage.heartRate" name="heartRate"  disabled >
+                  
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom003" class="form-label">F. respiratoria (min)</label>
+                  <input type="text" class="form-control" #breathingFrequency="ngModel" [(ngModel)]="attentionSelected.triage.breathingFrequency" name="breathingFrequency"  disabled>
+                  
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom004" class="form-label">Temperatura (°C)</label>
+                  <input type="text" class="form-control" #temperature="ngModel" [(ngModel)]="attentionSelected.triage.temperature" name="temperature"   disabled>
+                  
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom005" class="form-label">Peso (kg)</label>
+                  <input type="number" #weight="ngModel" [(ngModel)]="attentionSelected.triage.weight" name="weight"  class="form-control" disabled>
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom005" class="form-label">Talla (cm)</label>
+                  <input type="number" #height="ngModel" [(ngModel)]="attentionSelected.triage.height" name="height"  class="form-control" disabled>
+                </div>
+                
+              
+                <div class="col-md-6">
+                  <label for="validationCustom001" class="form-label">Servicio</label>
+                  <select class="form-select" id="validationCustom001" disabled>
+                    <option selected>Consulta Extena</option>
+                  </select>
+                  
+                </div>
+        
+                <div class="col-md-12">
+                  <label for="Address" class=" col-form-label">Relato del paciente</label>
+                  <textarea id="validationCustom012" #patientReport="ngModel" [(ngModel)]="attentionSelected.patientReport" name="patientReport" type="text" class="form-control" disabled> </textarea>
+                </div>
+                
+                
+              </form>
+        
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Diagnóstico y recomendaciones</h5>
+              
+              <form class="row g-3 needs-validation" novalidate>
+                <div class="col-12">
+                  <table class="table table-bordered" style="margin-bottom: 0">
+                    <thead>
+                      <tr>
+                        <div class="row"> 
+                          <div class="col-3 custom-border-tb">
+                            <th scope="col col-md-6">Código</th>
+      
+                          </div>
+                          <div class="col-9 custom-border-tb" >
+                            <th scope="col">Diagnóstico</th>
+                          </div>
+      
+                        </div>
+                      </tr>
+      
+                      
+                    </thead>
+                    <tbody>
+                      <tr *ngFor = "let diagnosis of attentionSelected.diagnoses">
+                        <div class="row"> 
+                          <div class="col-3 custom-border-tb" >
+                            <td>{{diagnosis.code}}</td>
+      
+                          </div>
+                          <div class="col-9 custom-border-tb">
+                            <td>{{diagnosis.name}}</td>
+                          </div>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+                </div>
+      
+                <div class="col-md-12">
+                  <label for="Address" class="col-form-label">Recomendaciones</label>
+                  <div >
+                    <textarea  #recommendations="ngModel" [(ngModel)]="attentionSelected.recommendations" name="recommendations" type="text" class="form-control" id="Address" disabled> </textarea>
+                  </div>
+                </div>
+      
+      
+              </form>
+      
+            </div>
+          </div>
+      
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Receta</h5>
+              
+      
+              <form #attentionTreatement="ngForm" class="row g-3 needs-validation">
+                
+                <div class="col-12">
+                  <table class="table table-bordered" style="margin-bottom: 0">
+                    <thead>
+                      <tr>
+                        <th scope="col">Medicamento</th>
+                        <th scope="col">Dosis</th>
+                        <th scope="col">Frec.</th>
+                        <th scope="col">Duración</th>
+                        <th scope="col">Vía</th>
+                        <th scope="col col-md-6">Diagnóstico</th>
+                      </tr>
+                    </thead>
+                    <tbody>                            
+      
+                      <tr *ngFor = "let treatment of attentionSelected.treatments">
+                        <td>{{treatment.medicine.name}}</td>
+                        <td>{{treatment.dose}}{{treatment.doseUn}}</td>
+                        <td>{{treatment.frequencyNumber}}{{treatment.frequencyType}}</td>
+                        <td>{{treatment.durationNumber}}{{treatment.durationType}}</td>
+                        <td>{{treatment.routeAdministration}}</td>
+                        <td>{{getDiagnosis(treatment.diagnosisId) | slice:0:12}}</td>
+                      </tr>
+      
+                    </tbody>
+                  </table>
+                </div>
+                
+      
+                
+                <div class="col-5">
+                  <label for="inputDate" class=" col-form-label">Fecha de vencimiento</label>
+                  <input type="date" #expirationDate="ngModel" [(ngModel)]="attentionSelected.expirationDate" name="expirationDate"  class="form-control" disabled>
+                </div>
+      
+              </form>
+            
+      
+          
+            </div>
+          </div>
+      
+    </div>
+</div>

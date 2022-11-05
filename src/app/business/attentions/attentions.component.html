@@ -1,0 +1,88 @@
+
+<div id="main" class="main">
+
+    <div class="pagetitle">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Home</a></li>
+          <li class="breadcrumb-item">Listado atenciones</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <div class="row" *ngIf="!loaded">
+      <div class="col-12">
+        Cargando...
+      </div>
+    </div>
+    
+    <div class="row" *ngIf="loaded && !attentions.length">
+      <div class="col-12">
+        Sin historial de atenciones.
+      </div>
+    </div>
+
+    <div class="section" *ngIf="loaded && attentions.length">
+      <div class="row">
+      
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+
+
+              
+              <h5 class="card-title">Listado de atenciones</h5>
+
+              <div class="col-12">
+                  
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">C.A.</th>
+                      <th scope="col">H.C.</th>
+                      <th scope="col">Doc. Iden.</th>
+                      <th scope="col">Nombre completo</th>
+                      <th scope="col">Servicio</th>
+                      <th scope="col">Fecha/Hora atención</th>
+                      <th scope="col "></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let attention of attentions">
+                      <td>{{attention.patient.insuredCode}}</td>
+                      <td>{{attention.patient.clinicalHistoryNumber}}</td>
+                      <td>{{attention.patient.documentNumber}}</td>
+                      <td>{{attention.patient.name}} {{attention.patient.paternalLastName}} {{attention.patient.maternalLastName}}</td>
+                      <td>Consulta Externa</td>
+                      <td>{{attention.updateDate}}</td>
+                      <td>
+                        <button type="button" class="btn btn-light" (click)="showDetail(attention, modalDetail)">Ver detalle</button>
+                      </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+</div><!-- End #main -->
+
+<ng-template #modalDetail let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" style="color: #012970;">Atención</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body" style="overflow-y: hidden;">
+   <app-attention-detail [attention]="attentionSelected"></app-attention-detail>
+  </div>
+</ng-template>
+
+
+
+

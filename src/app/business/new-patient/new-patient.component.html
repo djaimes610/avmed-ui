@@ -1,0 +1,149 @@
+
+<div id="main" class="main">
+
+    <div class="pagetitle">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Home</a></li>
+          <li class="breadcrumb-item">Registro paciente</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+
+    <div class="section">
+      <div class="row">
+      
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Registro de paciente</h5>
+             
+
+              <form #formPatient="ngForm" (ngSubmit)="save(formPatient)" class="row g-3 needs-validation" >
+                <div class="col-md-3">
+                  <label for="validationCustom001" class="form-label">Tipo Documento</label>
+                  <select class="form-select">
+                    <option selected disabled value="">DNI</option>
+                  </select>
+                  
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom002" class="form-label">Número Documento</label>
+                  <input type="number" #documentNumber="ngModel" [(ngModel)]="patientModel.documentNumber" name="documentNumber" minlength="8" onKeyPress="if(this.value.length==8) return false;"  class="form-control" required   [ngClass]="{'invalid-input': documentNumber['invalid']  &&(documentNumber['dirty'] || documentNumber['touched'])}">
+                  <div class="invalid-form" *ngIf="documentNumber['invalid'] &&  documentNumber['touched']">
+                    <div *ngIf="documentNumber['errors'] && documentNumber['errors']['required']">
+                      Dato requerido.
+                    </div>
+                    <div *ngIf="documentNumber['errors'] && documentNumber['errors']['minlength']">
+                      El número de documento debe tener 8 dígitos
+                    </div>                    
+                 </div>
+                
+                 
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom003" class="form-label">Historia clínica</label>
+                  <input type="number" #clinicalHistoryNumber="ngModel" [(ngModel)]="patientModel.clinicalHistoryNumber" name="clinicalHistoryNumber" minlength="4"  onKeyPress="if(this.value.length==4) return false;"  class="form-control" required  [ngClass]="{'invalid-input': clinicalHistoryNumber['invalid']  &&(clinicalHistoryNumber['dirty'] || clinicalHistoryNumber['touched'])}">
+                  <div class="invalid-form" *ngIf="clinicalHistoryNumber['invalid'] &&  clinicalHistoryNumber['touched']">
+                    <div *ngIf="clinicalHistoryNumber['errors'] && clinicalHistoryNumber['errors']['required']">
+                      Dato requerido.
+                    </div>
+                    <div *ngIf="clinicalHistoryNumber['errors'] && clinicalHistoryNumber['errors']['minlength']">
+                      El número de historia clínica debe tener 4 dígitos
+                    </div> 
+                 </div>
+                </div>
+                <div class="col-md-3">
+                  <label for="validationCustom004" class="form-label">Código asegurado</label>
+                  <input type="number" #insuredCode="ngModel" [(ngModel)]="patientModel.insuredCode" name="insuredCode"  minlength="4"  onKeyPress="if(this.value.length==4) return false;"  class="form-control" required  [ngClass]="{'invalid-input': insuredCode['invalid']  &&(insuredCode['dirty'] || insuredCode['touched'])}">
+                  <div class="invalid-form" *ngIf="insuredCode['invalid'] &&  insuredCode['touched']">
+                    <div *ngIf="insuredCode['errors'] && insuredCode['errors']['required']">
+                      Dato requerido.
+                    </div>
+                    <div *ngIf="insuredCode['errors'] && insuredCode['errors']['minlength']">
+                      El código asegurado debe tener 4 dígitos
+                    </div> 
+                 </div>
+                </div>
+                <div class="col-md-4">
+                  <label for="validationCustom005" class="form-label">Nombre(s)</label>
+                  <input type="text" #name="ngModel" [(ngModel)]="patientModel.name" name="name" class="form-control" required [ngClass]="{'invalid-input': name['invalid']  &&(name['dirty'] || name['touched'])}">
+                
+                  <div class="invalid-form" *ngIf="name['invalid'] &&  name['touched']">
+                     Dato requerido.
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="validationCustom006" class="form-label">Apellido Paterno</label>
+                  <input type="text" #paternalLastName="ngModel" [(ngModel)]="patientModel.paternalLastName" name="paternalLastName"  class="form-control" required  [ngClass]="{'invalid-input': paternalLastName['invalid']  &&(paternalLastName['dirty'] || paternalLastName['touched'])}">
+                  <div class="invalid-form" *ngIf="paternalLastName['invalid'] &&  paternalLastName['touched']">
+                    Dato requerido.
+                 </div>
+                </div>
+                <div class="col-md-4">
+                  <label for="validationCustom001" class="form-label">Apellido Materno</label>
+                  <input type="text" #maternalLastName="ngModel" [(ngModel)]="patientModel.maternalLastName" name="maternalLastName"  class="form-control" required  [ngClass]="{'invalid-input': maternalLastName['invalid']  &&(maternalLastName['dirty'] || maternalLastName['touched'])}">
+                  <div class="invalid-form" *ngIf="maternalLastName['invalid'] &&  maternalLastName['touched']">
+                    Dato requerido.
+                 </div>
+                </div>
+                <div class="col-md-4">
+                  <label for="validationCustom001" class="form-label">Sexo</label>
+                  <select class="form-select" [(ngModel)]="patientModel.sex" name="sex">
+                    <option *ngFor="let sex of Sex" [ngValue]="sex">{{sex}}</option>
+                  </select>
+                </div>
+
+               
+              
+              
+                <div class="col-md-4">
+                  <label for="validationCustom001" class="form-label">Fecha Nacimiento</label>
+                  <input type="date" #birthDate="ngModel" [(ngModel)]="patientModel.birthDate" name="birthDate"  class="form-control" required  [ngClass]="{'invalid-input': birthDate['invalid']  &&(birthDate['dirty'] || birthDate['touched'])}">
+                  <div class="invalid-form" *ngIf="birthDate['invalid'] &&  birthDate['touched']">
+                    Dato requerido.
+                 </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="validationCustom001" class="form-label">Financiador</label>
+                  <select class="form-select" id="validationCustom009">
+                    <option selected disabled value="">S.I.S.</option>
+                    <option>Externo</option>
+                  </select>
+                </div>
+
+               
+    
+                
+                <div class="col-12 mt-4">
+                  <button class="btn btn-primary" style="margin-right: 10px;" [disabled]="!formPatient.valid" type="submit" >Guardar</button>
+
+                  <button class="btn  btn-outline-secondary ml-3" (click)="cancel()">Cancelar</button>
+                </div>
+                
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div><!-- End #main -->
+
+
+<div class="custom-alert" *ngIf="showSuccessAlert">
+  <ngb-alert [type]="'success'" >
+    Datos del paciente se registró los correctamente
+  </ngb-alert>
+</div>
+
+<div class="custom-alert" *ngIf="showErrorAlert">
+  <ngb-alert [type]="'warning'" >
+    Datos incorrectos, <span style="font-weight: bold;">{{errorMessage}} </span>le pertenece a otro paciente.
+  </ngb-alert>
+</div>

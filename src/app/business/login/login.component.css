@@ -1,0 +1,9 @@
+.invalid-form {
+    font-size: 0.875em;
+    color: #dc3545;
+    height: 21px;
+ }
+ .invalid-input {
+    border-color: #dc3545;
+ }
+ 
