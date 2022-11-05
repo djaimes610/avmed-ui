@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PattientClientService {
 
-  baseUrl = "http://localhost:9065/";
+  baseUrl = "https://avmed.herokuapp.com/";
 
   constructor(  private http: HttpClient) { }
 

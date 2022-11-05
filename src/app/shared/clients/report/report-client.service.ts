@@ -8,7 +8,7 @@ import { Report } from '../../models/Report';
 })
 export class ReportClientService {
   
-  baseUrl = "http://localhost:9065/";
+  baseUrl = "https://avmed.herokuapp.com/";
 
   constructor(  private http: HttpClient) { }
 

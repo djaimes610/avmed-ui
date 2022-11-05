@@ -8,7 +8,7 @@ import { Diagnosis } from '../../models/Diagnosis';
   providedIn: 'root'
 })
 export class DiagnosisClientService {
-  baseUrl = "http://localhost:9065/";
+  baseUrl = "https://avmed.herokuapp.com/";
 
   constructor(  private http: HttpClient) { }
 

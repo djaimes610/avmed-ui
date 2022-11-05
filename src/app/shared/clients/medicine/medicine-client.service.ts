@@ -8,7 +8,7 @@ import { Medicine } from '../../models/Medicine';
   providedIn: 'root'
 })
 export class MedicineClientService {
-  baseUrl = "http://localhost:9065/";
+  baseUrl = "https://avmed.herokuapp.com/";
 
   constructor(  private http: HttpClient) { }
 

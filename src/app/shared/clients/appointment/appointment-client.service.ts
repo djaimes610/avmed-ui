@@ -7,7 +7,7 @@ import { AppointmentRp } from '../../models/Appointment';
   providedIn: 'root'
 })
 export class AppointmentClientService {
-  baseUrl = 'http://localhost:9065/';
+  baseUrl = 'https://avmed.herokuapp.com/';
 
   constructor(private http: HttpClient) { }
 

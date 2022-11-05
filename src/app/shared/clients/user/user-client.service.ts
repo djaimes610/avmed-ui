@@ -9,7 +9,7 @@ import { IUserRp, User } from '../../models/User';
 export class UserClienService {
 
  
-  baseUrl = "http://localhost:9065/";
+  baseUrl = "https://avmed.herokuapp.com/";
 
   constructor(  private http: HttpClient) { }
 
