@@ -3,7 +3,6 @@ export interface IUserInfo {
     healthPersonnelId: string,
     healthPersonnelName: string,
     healthPersonnelSpecialty: string,
-    
   }
   
 

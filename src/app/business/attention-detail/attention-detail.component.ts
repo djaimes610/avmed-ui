@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AttentionRp, TriageRp } from 'src/app/shared/models/Attention';
+import { AttentionRp, HealthPersonnelRp, TriageRp } from 'src/app/shared/models/Attention';
 import { PatientRp } from 'src/app/shared/models/Patient';
 
 @Component({
@@ -8,7 +8,7 @@ import { PatientRp } from 'src/app/shared/models/Patient';
   styleUrls: ['./attention-detail.component.css']
 })
 export class AttentionDetailComponent implements OnInit {
-  @Input('attention') attentionSelected: AttentionRp = new AttentionRp('','','',this.getNewTriage(),[],[],'',this.getNewPatient(),'','');
+  @Input('attention') attentionSelected: AttentionRp = new AttentionRp('','','',this.getNewTriage(),[],[],'',this.getNewPatient(),this.getNewHealthPersonnel(),'');
 
   constructor() { }
 
@@ -28,5 +28,8 @@ export class AttentionDetailComponent implements OnInit {
     return new PatientRp('', '', '','','', '', '', '','','');
 
   }
+  getNewHealthPersonnel() {
+    return new HealthPersonnelRp('', '', '','','', '','');
 
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AttentionClientService } from 'src/app/shared/clients/attention/attention-client.service';
-import { AttentionRp, Triage, TriageRp } from 'src/app/shared/models/Attention';
+import { AttentionRp, HealthPersonnelRp, Triage, TriageRp } from 'src/app/shared/models/Attention';
 import { PatientRp } from 'src/app/shared/models/Patient';
 import { IUserInfo } from 'src/app/shared/models/User';
 import { UserStoreService } from 'src/app/shared/stores/user/user-store.service';
@@ -13,7 +13,7 @@ import { UserStoreService } from 'src/app/shared/stores/user/user-store.service'
 })
 export class AttentionsComponent implements OnInit {
   attentions: AttentionRp[] = [];
-  attentionSelected: AttentionRp = new AttentionRp('','','',this.getNewTriage(),[],[],'',this.getNewPatient(),'','');
+  attentionSelected: AttentionRp = new AttentionRp('','','',this.getNewTriage(),[],[],'',this.getNewPatient(),this.getNewHealthPersonnel(),'');
   
   loaded: Boolean = false;
 
@@ -45,6 +45,12 @@ export class AttentionsComponent implements OnInit {
     this.modalService.open(modalDetail, { size: 'xl' });
 
   }
+  
+  showPrescription(attention: AttentionRp, modalDetail: any) {
+    this.attentionSelected = attention;
+    this.modalService.open(modalDetail, { size: 'xl' });
+
+  }
 
   getDiagnosis(diagnosisId: String){
     const diagnosis = this.attentionSelected.diagnoses.filter(diagnosis => diagnosis.id == diagnosisId)[0];
@@ -56,6 +62,10 @@ export class AttentionsComponent implements OnInit {
   }
   getNewPatient() {
     return new PatientRp('', '', '','','', '', '', '','','');
+
+  }
+  getNewHealthPersonnel() {
+    return new HealthPersonnelRp('', '', '','','', '','');
 
   }
 }

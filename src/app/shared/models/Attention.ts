@@ -67,6 +67,17 @@ export class AttentionRq {
     ) { }
   }
 
+  export class HealthPersonnelRp {
+    constructor(
+        public id: string,
+        public name: string,
+        public paternalLastName: string,
+        public maternalLastName: string,
+        public signature: string,
+        public specialty: string,
+        public documentNumber: string
+    ) { }
+  }
   export class AttentionRp {
     constructor(
         public id: string,
@@ -77,7 +88,7 @@ export class AttentionRq {
         public treatments: TreatmentRp[] | [],
         public expirationDate: string,
         public patient: PatientRp,
-        public healthPersonnelId: string,
+        public healthPersonnel: HealthPersonnelRp,
         public recommendations: String
     ) { }
   }

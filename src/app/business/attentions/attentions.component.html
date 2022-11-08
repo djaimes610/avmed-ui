@@ -46,6 +46,7 @@
                       <th scope="col">Servicio</th>
                       <th scope="col">Fecha/Hora atención</th>
                       <th scope="col "></th>
+                      <th scope="col "></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -57,7 +58,13 @@
                       <td>Consulta Externa</td>
                       <td>{{attention.updateDate}}</td>
                       <td>
-                        <button type="button" class="btn btn-light" (click)="showDetail(attention, modalDetail)">Ver detalle</button>
+                        <button type="button" class="btn btn-light" (click)="showDetail(attention, modalDetail)"><i class="bi bi-eye"></i>
+
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-light" (click)="showPrescription(attention, modalPrescription)"><i class="bi bi-printer"></i>
+                        </button>
                       </td>
                     </tr>
                     
@@ -80,6 +87,15 @@
   </div>
   <div class="modal-body" style="overflow-y: hidden;">
    <app-attention-detail [attention]="attentionSelected"></app-attention-detail>
+  </div>
+</ng-template>
+
+<ng-template #modalPrescription let-modal>
+  <div class="modal-header">
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body" style="overflow-y: hidden;">
+   <app-prescription [attention]="attentionSelected"></app-prescription>
   </div>
 </ng-template>
 

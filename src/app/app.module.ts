@@ -28,6 +28,8 @@ import { ReportClientService } from './shared/clients/report/report-client.servi
 import { PatientHistoryComponent } from './business/patient-history/patient-history.component';
 import { PatientDetailComponent } from './business/patient-detail/patient-detail.component';
 import { AttentionDetailComponent } from './business/attention-detail/attention-detail.component';
+import { PrescriptionComponent } from './business/prescription/prescription.component';
+import { NgxPrintElementModule } from 'ngx-print-element';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { AttentionDetailComponent } from './business/attention-detail/attention-
     SidebarComponent,
     PatientHistoryComponent,
     PatientDetailComponent,
-    AttentionDetailComponent
+    AttentionDetailComponent,
+    PrescriptionComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { AttentionDetailComponent } from './business/attention-detail/attention-
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     NgbModule,
-    StoreFactoryModule.forRoot()
+    StoreFactoryModule.forRoot(),
+    NgxPrintElementModule
 
   ],
   providers: [

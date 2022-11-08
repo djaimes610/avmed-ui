@@ -17,7 +17,7 @@
     
     <div class="row" *ngIf="loaded && !appointments.length">
       <div class="col-12">
-        No existe citas pendientes.
+        No tiene citas pendientes.
       </div>
     </div>
 
@@ -60,7 +60,7 @@
                       <td>{{appointment.patient.age}}</td>
                       <td>{{appointment.patient.sex}}</td>
                       <td>
-                        <button type="button" class="btn btn-light" (click)="goAttention(appointment)">Atender</button>
+                        <button type="button" class="btn btn-primary" (click)="goAttention(appointment)">Atender</button>
                       </td>
                     </tr>
                     

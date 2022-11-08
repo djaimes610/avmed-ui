@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AttentionClientService } from 'src/app/shared/clients/attention/attention-client.service';
-import { AttentionRp, TriageRp } from 'src/app/shared/models/Attention';
+import { AttentionRp, HealthPersonnelRp, TriageRp } from 'src/app/shared/models/Attention';
 import { PatientRp } from 'src/app/shared/models/Patient';
 
 @Component({
@@ -12,7 +12,7 @@ export class PatientHistoryComponent implements OnInit {
   @Input('patientId') patientId: string = '';
 
   attentions: AttentionRp[] = [];
-  attentionSelected: AttentionRp = new AttentionRp('','','',this.getNewTriage(),[],[],'',this.getNewPatient(),'','');
+  attentionSelected: AttentionRp = new AttentionRp('','','',this.getNewTriage(),[],[],'',this.getNewPatient(),this.getNewHealthPersonnel(),'');
 
   loaded: Boolean = false;
 
@@ -52,6 +52,10 @@ export class PatientHistoryComponent implements OnInit {
   }
   getNewPatient() {
     return new PatientRp('', '', '','','', '', '', '','','');
+
+  }
+  getNewHealthPersonnel() {
+    return new HealthPersonnelRp('', '', '','','', '','');
 
   }
 
